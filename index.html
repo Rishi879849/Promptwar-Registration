@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptWars @ UIT RGPV | Spider-Man Themed AI Hackathon 2026</title>
+
+  <meta name="description" content="With Great Prompts, Comes Great Code. PromptWars 2026 @ UIT RGPV – India's premier vibe coding and prompt engineering hackathon powered by Google Gemini.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕷️</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+
+  <noscript>
+    <style>
+      body { font-family: sans-serif; background: #030508; color: #F1F5F9; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 24px; }
+    </style>
+    <div style="max-width:480px;margin:auto;">
+      <div style="font-size:64px;margin-bottom:16px;">🕷️</div>
+      <h1 style="color:#E23636;font-size:28px;margin-bottom:12px;">JavaScript Required</h1>
+      <p>PromptWars requires JavaScript to run the 3D background, registration form, and interactive features. Please enable JavaScript in your browser to continue.</p>
+    </div>
+  </noscript>
+</head>
+<body>
+
+  <!-- ░░ THREE.JS 3D BACKGROUND CANVAS ░░ -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <div class="logo-group">
+        <!-- Spider-Man Web Icon -->
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="#E23636" stroke="#B91C1C" stroke-width="2"/>
+          <!-- Web lines -->
+          <line x1="50" y1="2"  x2="50" y2="98" stroke="black" stroke-width="2.5" opacity="0.5"/>
+          <line x1="2"  y1="50" x2="98" y2="50" stroke="black" stroke-width="2.5" opacity="0.5"/>
+          <line x1="15" y1="15" x2="85" y2="85" stroke="black" stroke-width="2.5" opacity="0.5"/>
+          <line x1="85" y1="15" x2="15" y2="85" stroke="black" stroke-width="2.5" opacity="0.5"/>
+          <ellipse cx="50" cy="50" rx="18" ry="48" fill="none" stroke="black" stroke-width="2" opacity="0.35"/>
+          <ellipse cx="50" cy="50" rx="38" ry="48" fill="none" stroke="black" stroke-width="2" opacity="0.35"/>
+          <circle  cx="50" cy="50" r="12" fill="none" stroke="black" stroke-width="2" opacity="0.4"/>
+          <circle  cx="50" cy="50" r="26" fill="none" stroke="black" stroke-width="2" opacity="0.3"/>
+          <circle  cx="50" cy="50" r="40" fill="none" stroke="black" stroke-width="2" opacity="0.25"/>
+        </svg>
+        <span class="logo-text">
+          <span style="color: var(--spidey-red);">Prompt</span><span style="color: #fff;">Wars</span>
+        </span>
+        <span class="badge">UIT RGPV</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#eligibility">Who Can Join</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#rewards">Rewards</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="navbar-btn">
+        <button class="btn btn-primary btn-register" id="navRegisterBtn">Register Now</button>
+      </div>
+
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ░░ MOBILE DRAWER ░░ -->
+  <div class="nav-drawer" id="navDrawer">
+    <div class="drawer-header">
+      <span class="logo-text" style="color:var(--spidey-red);">PromptWars</span>
+      <button class="drawer-close" aria-label="Close Menu">&times;</button>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#eligibility">Who Can Join</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#rewards">Rewards</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <button class="btn btn-primary btn-register" style="width:100%;">Register Now</button>
+  </div>
+
+  <!-- ░░ HERO ░░ -->
+  <section class="hero" id="hero">
+    <!-- Spider web corner decorations -->
+    <svg class="web-corner top-left" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="0" x2="220" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="110" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="110" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="0"   y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="0"   stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="55"  y2="220" stroke="white" stroke-width="0.6"/>
+      <line x1="0" y1="0" x2="220" y2="55"  stroke="white" stroke-width="0.6"/>
+      <line x1="0" y1="0" x2="165" y2="220" stroke="white" stroke-width="0.6"/>
+      <line x1="0" y1="0" x2="220" y2="165" stroke="white" stroke-width="0.6"/>
+      <path d="M 50  0 Q 0 0 0 50"  fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 90  0 Q 0 0 0 90"  fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 130 0 Q 0 0 0 130" fill="none" stroke="white" stroke-width="0.6"/>
+      <path d="M 170 0 Q 0 0 0 170" fill="none" stroke="white" stroke-width="0.6"/>
+      <path d="M 210 0 Q 0 0 0 210" fill="none" stroke="white" stroke-width="0.5"/>
+    </svg>
+    <svg class="web-corner top-right" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="0" x2="220" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="110" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="110" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="0"   y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="0"   stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="55"  y2="220" stroke="white" stroke-width="0.6"/>
+      <line x1="0" y1="0" x2="220" y2="55"  stroke="white" stroke-width="0.6"/>
+      <path d="M 50  0 Q 0 0 0 50"  fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 90  0 Q 0 0 0 90"  fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 130 0 Q 0 0 0 130" fill="none" stroke="white" stroke-width="0.6"/>
+      <path d="M 170 0 Q 0 0 0 170" fill="none" stroke="white" stroke-width="0.6"/>
+    </svg>
+
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          <span>🕷️ With Great Prompts, Comes Great Code</span>
+        </div>
+        <h1 class="hero-title">
+          Unleash Your<br>Inner <span>Spider-Dev</span>
+        </h1>
+        <p class="hero-description">
+          Welcome to <strong style="color:var(--spidey-red);">PromptWars @ UIT RGPV</strong> — India's premier vibe coding hackathon. Swing through complex problems using Google's Gemini AI. Write less syntax, think bigger, build faster.
+        </p>
+
+        <div class="hero-info-grid">
+          <div class="hero-info-item">
+            <div class="hero-info-icon icon-red">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V10H19V20ZM19 8H5V6H19V8Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="hero-info-text">
+              <h4>Date &amp; Time</h4>
+              <p>October 15–16, 2026</p>
+            </div>
+          </div>
+          <div class="hero-info-item">
+            <div class="hero-info-icon icon-blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="hero-info-text">
+              <h4>Venue</h4>
+              <p>Main Auditorium, UIT RGPV</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-register">🕸️ Swing In — Register</button>
+          <a href="#overview" class="btn btn-secondary">Explore Program</a>
+        </div>
+      </div>
+
+      <!-- Terminal Visual -->
+      <div class="hero-visual">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-yellow"></span>
+              <span class="terminal-dot td-green"></span>
+            </div>
+            <div class="terminal-title">spider-agent.sh</div>
+            <div style="width:48px;"></div>
+          </div>
+          <div class="terminal-body">
+            <div class="code-prompt">$ <span class="code-user-input" id="terminal-typing"></span><span class="code-cursor"></span></div>
+            <div class="code-response">
+              <span class="code-comment"># 🕷️ Initializing Gemini API Connection...</span><br>
+              <span class="text-green">[SUCCESS]</span> Connected to Gemini-2.5-Flash.<br>
+              <span class="code-comment"># Weaving project architecture...</span><br>
+              - Theme: Spider-Man Dark UI ✓<br>
+              - API: Gemini multimodal integration ✓<br>
+              - Status: Web-swinging at full speed!<br>
+              <br>
+              <span class="text-blue">⚡ PromptWars 2026 @ UIT RGPV is LIVE!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ OVERVIEW ░░ -->
+  <section class="section-padding text-center" id="overview">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle text-red">Build With AI</p>
+        <h2 class="section-title">What is Google PromptWars?</h2>
+        <p class="section-desc">
+          PromptWars is India's first end-to-end vibe coding competition. Use LLMs as your primary IDE, tackle real-world problems, and build at the speed of thought — just like your friendly neighborhood Spider-Dev.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card card-red" id="feat-vibe">
+          <div class="feature-icon-wrapper icon-red">⚡</div>
+          <h3>Vibe Coding</h3>
+          <p>State your requirements clearly, let LLMs write the code, and focus on system architecture, design, and user flow — like spinning a perfect web.</p>
+        </div>
+        <div class="feature-card card-blue" id="feat-gemini">
+          <div class="feature-icon-wrapper icon-blue">🧠</div>
+          <h3>Gemini 2.5 API</h3>
+          <p>Get direct sandbox keys and API credits to build with Google's most advanced multimodal models — your Gemini sense will tingle.</p>
+        </div>
+        <div class="feature-card card-yellow" id="feat-team">
+          <div class="feature-icon-wrapper icon-yellow">🕸️</div>
+          <h3>Teams of 1–3</h3>
+          <p>Register solo or assemble your super-squad of up to 3. Every Spider-Man needs their team — sometimes even the Avengers need help.</p>
+        </div>
+        <div class="feature-card card-green" id="feat-mentors">
+          <div class="feature-icon-wrapper icon-green">🎓</div>
+          <h3>Google Mentorship</h3>
+          <p>Stuck on an endpoint or prompt? Google Developer Experts (GDEs) and senior engineers will swing by to mentor you throughout the event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SECTION WITH MOCKUP — "Build Faster" ░░ -->
+  <section class="mockup-section" id="build-faster">
+    <div class="mockup-container">
+
+      <!-- Text Side -->
+      <div class="mockup-text" data-anim="fade-up">
+        <p class="section-subtitle text-red" style="margin-bottom:10px;">🕷️ Vibe Coding</p>
+        <h2 class="mockup-heading">
+          Code at the<br>speed of
+          <span class="mockup-heading-accent">thought.</span>
+        </h2>
+        <p class="mockup-description">
+          Stop writing syntax. Start describing outcomes. PromptWars puts Google Gemini 2.5 in your hands — describe what you need, watch it build, and ship working software in hours, not days. Your friendly neighborhood LLM is ready.
+        </p>
+        <div class="mockup-tags">
+          <span class="mockup-tag">⚡ Zero Boilerplate</span>
+          <span class="mockup-tag">🧠 Gemini 2.5 API</span>
+          <span class="mockup-tag">🕸️ Vibe Coding</span>
+        </div>
+      </div>
+
+      <!-- Image / Mockup Side -->
+      <div class="mockup-visual" data-anim="fade-up" data-delay="150">
+
+        <!-- Background decorative card (floats up slowly) -->
+        <div class="mockup-bg-card" id="mockupBgCard">
+          <img
+            src="spidey-bg.png"
+            alt="Spider-Man web and code backdrop"
+            class="mockup-card-img"
+          />
+        </div>
+
+        <!-- Main glass card (floats down slightly) -->
+        <div class="mockup-main-card" id="mockupMainCard">
+          <div class="mockup-card-inner">
+            <!-- Spider-Man themed code editor mockup -->
+            <div class="mockup-editor">
+              <div class="editor-bar">
+                <span class="editor-dot dot-red"></span>
+                <span class="editor-dot dot-yellow"></span>
+                <span class="editor-dot dot-green"></span>
+                <span class="editor-filename">spidey-prompt.js</span>
+              </div>
+              <div class="editor-body">
+                <div class="editor-line"><span class="ec">// 🕷️ Prompt Engineering in action</span></div>
+                <div class="editor-line"><span class="ek">const</span> <span class="ev">prompt</span> <span class="ep">=</span> <span class="es">`</span></div>
+                <div class="editor-line">  <span class="es">  Build a REST API for a student</span></div>
+                <div class="editor-line">  <span class="es">  registration system with auth,</span></div>
+                <div class="editor-line">  <span class="es">  validation &amp; MongoDB models.</span></div>
+                <div class="editor-line"><span class="es">`</span>;</div>
+                <div class="editor-line"></div>
+                <div class="editor-line"><span class="ek">const</span> <span class="ev">result</span> <span class="ep">=</span> <span class="ek">await</span> <span class="ef">gemini</span><span class="ep">.</span><span class="ef">generate</span><span class="ep">(</span><span class="ev">prompt</span><span class="ep">)</span>;</div>
+                <div class="editor-line"></div>
+                <div class="editor-line"><span class="ec">// ✅ 340 lines generated in 2.1s</span></div>
+                <div class="editor-line"><span class="ec">// 🚀 Tests passing: 12/12</span></div>
+              </div>
+              <!-- Animated status bar -->
+              <div class="editor-status">
+                <span class="status-dot"></span>
+                <span>Gemini 2.5 Flash · Connected</span>
+                <span class="status-sep">|</span>
+                <span>Tokens: 2,847</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Decorative bottom gradient line -->
+    <div class="mockup-bottom-line"></div>
+  </section>
+
+  <!-- ░░ SECTION WITH MOCKUP 2 — "Join the Arena" (reversed) ░░ -->
+  <section class="mockup-section mockup-section-alt" id="join-arena">
+    <div class="mockup-container mockup-reverse">
+
+      <!-- Image / Mockup Side (left when reversed) -->
+      <div class="mockup-visual" data-anim="fade-up">
+
+        <!-- Background decorative card -->
+        <div class="mockup-bg-card mockup-bg-card-right" id="mockupBgCard2">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80"
+            alt="Hackathon team"
+            class="mockup-card-img"
+          />
+        </div>
+
+        <!-- Main glass card -->
+        <div class="mockup-main-card" id="mockupMainCard2">
+          <div class="mockup-card-inner">
+            <!-- Stats display -->
+            <div class="mockup-stats-card">
+              <div class="stats-header">
+                <span class="stats-icon">🕸️</span>
+                <span class="stats-title">PromptWars 2026 — Live Stats</span>
+              </div>
+              <div class="stats-grid-mini">
+                <div class="stat-mini">
+                  <div class="stat-mini-val" id="animStat1">0</div>
+                  <div class="stat-mini-label">Registrations</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-val">3</div>
+                  <div class="stat-mini-label">Prize Tiers</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-val">48h</div>
+                  <div class="stat-mini-label">Hacking Time</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-val">$400</div>
+                  <div class="stat-mini-label">Cloud Credits</div>
+                </div>
+              </div>
+              <div class="stats-bar-row">
+                <span>Registrations filling up</span>
+                <span class="stats-bar-pct" id="regBarPct">0%</span>
+              </div>
+              <div class="stats-bar-track">
+                <div class="stats-bar-fill" id="regBarFill" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Side (right when reversed) -->
+      <div class="mockup-text" data-anim="fade-up" data-delay="150">
+        <p class="section-subtitle text-red" style="margin-bottom:10px;">🏆 The Arena</p>
+        <h2 class="mockup-heading">
+          Your moment<br>to become the
+          <span class="mockup-heading-accent">Spider-Dev.</span>
+        </h2>
+        <p class="mockup-description">
+          Two days. Real problems. Unlimited prompts. Compete against the best coders in UIT RGPV, get mentored by Google Developer Experts, and walk away with prizes, cloud credits, and a story worth telling.
+        </p>
+        <div class="mockup-tags">
+          <span class="mockup-tag">🎓 GDE Mentors</span>
+          <span class="mockup-tag">🏆 Google Prizes</span>
+          <span class="mockup-tag">☁️ Cloud Credits</span>
+        </div>
+        <button class="btn btn-primary btn-register" style="margin-top: 28px; padding: 12px 28px; font-size: 15px;">
+          🕸️ Register Now
+        </button>
+      </div>
+
+    </div>
+    <div class="mockup-bottom-line"></div>
+  </section>
+
+  <!-- ░░ ELIGIBILITY ░░ -->
+  <section class="section-padding eligibility" id="eligibility">
+    <div class="container eligibility-grid">
+      <div class="eligibility-image">
+        <div class="el-banner">
+          <h3>UIT RGPV Chapter</h3>
+          <p>Exclusive on-campus hackathon in collaboration with Google Developer Groups Bhopal.</p>
+          <div class="el-logos">
+            <span class="el-logo-text" style="color:#fff;">Google</span>
+            <span style="font-weight:300; color:rgba(255,255,255,0.5);">&times;</span>
+            <span class="el-logo-text" style="color:#FFD700;">UIT RGPV</span>
+          </div>
+        </div>
+        <div style="color:var(--text-muted); font-size:13px; text-align:center; margin-top:8px;">
+          *Carry your university ID card on the day of the event.
+        </div>
+      </div>
+
+      <div class="eligibility-text">
+        <p class="section-subtitle text-red">Participation Criteria</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Who Can<br>Participate?</h2>
+
+        <div class="eligibility-list">
+          <div class="eligibility-item" id="elig-students">
+            <div class="el-check">✓</div>
+            <div>
+              <h4>All UIT RGPV Students</h4>
+              <p>Open to all branches (CSE, IT, ECE, ME, Civil, etc.) from 1st year to final year.</p>
+            </div>
+          </div>
+          <div class="eligibility-item" id="elig-experience">
+            <div class="el-check">✓</div>
+            <div>
+              <h4>All Experience Levels</h4>
+              <p>Whether you're a seasoned LeetCoder or a VibeCoder just starting — this event has space for every Spider-Dev.</p>
+            </div>
+          </div>
+          <div class="eligibility-item" id="elig-skills">
+            <div class="el-check">✓</div>
+            <div>
+              <h4>Problem Solvers</h4>
+              <p>If you can articulate problems clearly and prompt LLMs to generate solutions, you have a solid chance of winning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SCHEDULE — Split Orbital Timeline ░░ -->
+  <section class="section-padding orbital-section" id="schedule">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-subtitle text-red">The Timeline</p>
+        <h2 class="section-title">Event Schedule</h2>
+        <p class="section-desc">Click any orbiting node to explore that phase of PromptWars 2026.</p>
+      </div>
+    </div>
+
+    <!-- Split layout: orbital left · panel right -->
+    <div class="orbital-layout">
+
+      <!-- Left: orbital animation -->
+      <div class="orbital-left">
+        <div class="orbital-stage" id="orbitalStage">
+          <div class="orbital-hub">
+            <div class="orbital-hub-core">🕸️</div>
+          </div>
+          <div class="orbital-ring"></div>
+        </div>
+      </div>
+
+      <!-- Right: detail panel -->
+      <div class="orbital-right">
+        <div class="orbital-panel">
+
+          <!-- Default state -->
+          <div class="orbital-placeholder" id="orbitalPlaceholder">
+            <div class="oph-web-icon">
+              <svg viewBox="0 0 80 80" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="40" cy="40" r="24" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle cx="40" cy="40" r="11" fill="none" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="40" y1="3" x2="40" y2="77" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="3" y1="40" x2="77" y2="40" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="10" y1="10" x2="70" y2="70" stroke="currentColor" stroke-width="0.7"/>
+                <line x1="70" y1="10" x2="10" y2="70" stroke="currentColor" stroke-width="0.7"/>
+              </svg>
+            </div>
+            <h3 class="oph-heading">Explore the Journey</h3>
+            <p class="oph-sub">Click an orbiting node — or a phase below — to reveal details</p>
+            <ul class="oph-phases" id="ophPhases">
+              <li data-id="1"><span class="oph-icon">🕸️</span><span class="oph-name">Registrations</span><span class="oph-badge-live">LIVE</span></li>
+              <li data-id="2"><span class="oph-icon">🕷️</span><span class="oph-name">Team Formation</span><span class="oph-when">Jul–Sep</span></li>
+              <li data-id="3"><span class="oph-icon">⏰</span><span class="oph-name">Reg. Closes</span><span class="oph-when">Sep 30</span></li>
+              <li data-id="4"><span class="oph-icon">⚡</span><span class="oph-name">Opening Ceremony</span><span class="oph-when">Oct 15</span></li>
+              <li data-id="5"><span class="oph-icon">💻</span><span class="oph-name">Build Sprint</span><span class="oph-when">Oct 15–16</span></li>
+              <li data-id="6"><span class="oph-icon">🏆</span><span class="oph-name">Demo &amp; Awards</span><span class="oph-when">Oct 16</span></li>
+            </ul>
+          </div>
+
+          <!-- Active detail (filled by JS) -->
+          <div class="orbital-detail" id="orbitalDetail"></div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ░░ REWARDS ░░ -->
+  <section class="section-padding rewards text-center" id="rewards">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle text-red">Prizes &amp; Goodies</p>
+        <h2 class="section-title">Rewards to be Won</h2>
+        <p class="section-desc">Conquer the arena and win Google dev items, certificates, and Spider-worthy glory.</p>
+      </div>
+
+      <div class="rewards-grid">
+        <div class="reward-card" id="reward-2nd">
+          <div class="reward-icon">🥈</div>
+          <div class="reward-prize">Runner Up</div>
+          <div class="reward-title">Google Nest Audio</div>
+          <ul class="reward-list">
+            <li>Google Dev Swag Box</li>
+            <li>Google Cloud Credits ($100)</li>
+            <li>Certificate of Excellence</li>
+          </ul>
+        </div>
+
+        <div class="reward-card gold-card" id="reward-1st">
+          <div class="reward-badge">🏆 Champion</div>
+          <div class="reward-icon">🕷️</div>
+          <div class="reward-prize">1st Prize</div>
+          <div class="reward-title">Google Nest Hub Max</div>
+          <ul class="reward-list">
+            <li>Premium Google Swag Kit</li>
+            <li>Google Cloud Credits ($250)</li>
+            <li>Exclusive Developer Mentorship</li>
+            <li>Winner's Trophy &amp; Certificate</li>
+          </ul>
+        </div>
+
+        <div class="reward-card" id="reward-3rd">
+          <div class="reward-icon">🥉</div>
+          <div class="reward-prize">3rd Prize</div>
+          <div class="reward-title">Google Home Mini</div>
+          <ul class="reward-list">
+            <li>Google Dev Swag Box</li>
+            <li>Google Cloud Credits ($50)</li>
+            <li>Certificate of Excellence</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top:40px; color:var(--text-muted); font-size:13px;">
+        *All verified participants receive a digital certificate from Google Developers &amp; GDG Bhopal, plus PromptWars stickers.
+      </p>
+    </div>
+  </section>
+
+  <!-- ░░ FAQ ░░ -->
+  <section class="section-padding faqs" id="faq">
+    <svg class="web-corner bottom-right" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="0" x2="220" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="110" y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="110" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="0"   y2="220" stroke="white" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="220" y2="0"   stroke="white" stroke-width="0.8"/>
+      <path d="M 50  0 Q 0 0 0 50"  fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 100 0 Q 0 0 0 100" fill="none" stroke="white" stroke-width="0.7"/>
+      <path d="M 150 0 Q 0 0 0 150" fill="none" stroke="white" stroke-width="0.6"/>
+      <path d="M 200 0 Q 0 0 0 200" fill="none" stroke="white" stroke-width="0.5"/>
+    </svg>
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-subtitle text-red">Common Doubts</p>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Got questions? Your friendly neighborhood PromptWar organizers have answers.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item" id="faq-cost">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-cost-answer">
+            Is there a registration fee?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-cost-answer" role="region">
+            No, the event is completely free of charge. Bring your laptop, student ID card, and a passion for building software with AI.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-laptop">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-laptop-answer">
+            Do I need to carry my own laptop?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-laptop-answer" role="region">
+            Yes, all participants must bring their own laptops and chargers. Stable Wi-Fi will be provided at the venue.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-team-size">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-team-answer">
+            What is the team size?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-team-answer" role="region">
+            You can register solo or as a team of up to 3 members. All team members must be current students of UIT RGPV.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-prompt">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-prompt-answer">
+            I don't know traditional coding — can I still join?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-prompt-answer" role="region">
+            Absolutely! That's the essence of Vibe Coding. If you can break down a problem, detail app states, and prompt LLMs to generate HTML/CSS/JS — you have a solid shot at winning.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🕷️ PromptWars @ UIT RGPV</h3>
+          <p>An initiative dedicated to fostering AI building skills, prompt engineering, and rapid prototyping amongst engineering students at UIT RGPV. Your friendly neighborhood hackathon.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Event Links</h4>
+          <ul>
+            <li><a href="#overview">About Overview</a></li>
+            <li><a href="#eligibility">Who Can Participate</a></li>
+            <li><a href="#schedule">Hacking Schedule</a></li>
+            <li><a href="#rewards">Prizes &amp; Swag</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact &amp; Info</h4>
+          <ul>
+            <li>Email: gdg.uitrgpv@gmail.com</li>
+            <li>Venue: UIT RGPV Campus, Bhopal, MP</li>
+            <li>Host: GDG Bhopal &amp; Hack2Skill</li>
+            <li><a href="admin.html" style="color:var(--spidey-red); font-weight:700;">🔐 Admin Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 PromptWars UIT RGPV. In collaboration with Google &amp; Hack2Skill. All rights reserved.</p>
+        <div class="footer-logos">
+          <span style="font-weight:700; color:var(--text-secondary);">GDG Bhopal</span>
+          <span style="color:var(--spidey-red);">|</span>
+          <span style="font-weight:700; color:var(--text-secondary);">UIT RGPV</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ░░ REGISTRATION MODAL ░░ -->
+  <div class="modal-overlay" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="modalTitle" style="font-family:var(--font-display); font-size:22px; letter-spacing:1px;">🕸️ Event Registration</h3>
+        <button class="modal-close" aria-label="Close Registration Form">&times;</button>
+      </div>
+
+      <form id="registrationForm">
+        <!-- Form Fields -->
+        <div class="modal-body" id="formBody">
+          <div class="form-group">
+            <label class="form-label" for="regName">Full Name</label>
+            <input type="text" id="regName" class="form-input" placeholder="e.g., Peter Parker" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="e.g., peter@uitrgpv.ac.in" required>
+            <span class="form-hint">Preferably use your college email ID if available</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="regPhone">Phone Number</label>
+              <input type="tel" id="regPhone" class="form-input" placeholder="e.g., +91 9876543210" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regRoll">College Roll Number</label>
+              <input type="text" id="regRoll" class="form-input" placeholder="e.g., 0101CS231089" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="regBranch">Branch / Department</label>
+              <select id="regBranch" class="form-select" required>
+                <option value="" disabled selected>Select branch</option>
+                <option value="CSE">Computer Science (CSE)</option>
+                <option value="IT">Information Technology (IT)</option>
+                <option value="ECE">Electronics &amp; Comm. (ECE)</option>
+                <option value="ME">Mechanical Engg (ME)</option>
+                <option value="Civil">Civil Engineering</option>
+                <option value="Other">Other Branch</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regSem">Current Semester</label>
+              <select id="regSem" class="form-select" required>
+                <option value="" disabled selected>Select sem</option>
+                <option value="1">1st Semester</option>
+                <option value="2">2nd Semester</option>
+                <option value="3">3rd Semester</option>
+                <option value="4">4th Semester</option>
+                <option value="5">5th Semester</option>
+                <option value="6">6th Semester</option>
+                <option value="7">7th Semester</option>
+                <option value="8">8th Semester</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regGithub">GitHub Profile URL (Optional)</label>
+            <input type="url" id="regGithub" class="form-input" placeholder="https://github.com/spidey-coder">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regExp">Prompt Engineering Experience</label>
+            <select id="regExp" class="form-select" required>
+              <option value="Beginner">Beginner (Used ChatGPT/Gemini occasionally)</option>
+              <option value="Intermediate" selected>Intermediate (Build scripts, refine system instructions)</option>
+              <option value="Expert">Expert (API configs, few-shot prompting, agent orchestration)</option>
+            </select>
+          </div>
+
+          <div class="form-terms">
+            <input type="checkbox" id="regTerms" required>
+            <label for="regTerms">I confirm that I am a student at UIT RGPV and will bring my student ID card to the venue.</label>
+          </div>
+        </div>
+
+        <!-- Success View -->
+        <div class="modal-body success-view" id="successView">
+          <div class="success-icon">🕷️</div>
+          <h3 class="success-title">You're In, Spider-Dev!</h3>
+          <p class="success-desc">
+            Welcome, <strong id="successName">Hero</strong>! Your registration for PromptWars @ UIT RGPV is confirmed. Get ready to swing into action on October 15–16!
+          </p>
+          <button type="button" class="btn btn-secondary modal-close-success" style="margin-top:10px;">Close Window</button>
+        </div>
+
+        <div class="modal-footer" id="modalFooter">
+          <button type="button" class="btn btn-secondary btn-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmitRegistration">🕸️ Submit Registration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- All logic lives in script.js (no duplicate inline block) -->
+  <script src="script.js"></script>
+</body>
+</html>
